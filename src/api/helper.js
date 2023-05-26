@@ -1,0 +1,1 @@
+export const BASE_URL = "https://backend-kp2v.onrender.com"
