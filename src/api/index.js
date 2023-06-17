@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { BASE_URL } from './helper';
 
-const API = axios.create({ baseURL: BASE_URL})
+const API = axios.create({ baseURL: process.env.REACT_APP_BACKEND_BASE_URL})
 
 API.interceptors.request.use((req) => {
     if(localStorage.getItem('profile')) {
@@ -21,3 +20,21 @@ export const comment = (value, id) => API.post(`/posts/${id}/commentPost`, { val
 
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
+
+export const getArtsyArtworks = async (page) => {
+    const config = {
+        method: 'GET',
+        url: `https://api.unsplash.com/search/collections?page=${page}&query=art`,
+        headers : {
+            "Content-Type": 'application/json',
+            "Authorization": `Client-ID ${process.env.REACT_APP_UNSPLASH_kEY}`,
+        }
+    }
+    try {
+        const response = await axios(config);
+        return response.data.results;
+    }
+    catch (e) {
+        console.log(e)
+    }
+}
