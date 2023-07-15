@@ -44,7 +44,7 @@ const Posts = ({ setCurrentId }) => {
   })
 
 
-  if(!posts.length && !isLoading) return 'No Posts';
+  if(!posts?.length && !isLoading) return 'No Posts';
   return (
     // if there no no posts/there are posts then do the following
     <>
